@@ -39,43 +39,66 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    int jumlahKotak= MediaQuery.of(context).size.width<=800? 2:4;
+    int jumlahKotak = MediaQuery.of(context).size.width <= 800 ? 2 : 4;
     List data = [
       {
         "nama": "Mclaren 560s",
         "rating": 3.5,
         "review": '7.1k',
         "harga": '\$3,300,300',
-        'like':'3.7k'
+        'like': '3.7k'
       },
       {
         "nama": "Lamborgini Aventador",
         "rating": 4.5,
         "review": '8.7k',
         "harga": '\$4,100,00',
-        'like':'4.1k'
+        'like': '4.1k'
       },
       {
         "nama": "Ferrarin 480",
         "rating": 4.0,
         "review": '12.4k',
         "harga": '\$2,700,00',
-        'like':'8.0k'
+        'like': '8.0k'
       },
       {
         "nama": "BMW M4",
         "rating": 5,
         "review": '10.7k',
         "harga": '\$5,00,00',
-        'like':'7.2k'
+        'like': '7.2k'
       }
     ];
 
     return Scaffold(
+        drawer: Drawer(
+          child: ListView(
+            children:const [
+              DrawerHeader(
+                decoration: BoxDecoration(color: Colors.lightBlue),
+                child: Text(
+                  'Menu',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.food_bank),
+                title: Text('Makanan'),
+              ),
+              ListTile(
+                leading: Icon(Icons.local_cafe),
+                title: Text('Minuman'),
+              )
+            ],
+          ),
+        ),
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.white,
-          title: Text(widget.title,),
+          title: Text(
+            widget.title,
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(20),
@@ -147,64 +170,104 @@ class _MyHomePageState extends State<MyHomePage> {
                               textAlign: TextAlign.center,
                             ),
                           ),
-                          SizedBox(height: constraint.maxHeight*0.02,),
-                          RatingBar.builder(
-                              itemBuilder: (context, _) => Icon(
-                                    Icons.star,
-                                    shadows: [
-                                      Shadow(
-                                        color: Colors.black,
-                                        offset: Offset(constraint.maxHeight*0.001, constraint.maxHeight*0.001,
-                                        ),blurRadius: 2
-                                      )
-                                    ],
-                                    color: Colors.orange[300],
-                                  ),
-                              onRatingUpdate: (rating){
-
-                              },
-                              itemSize: constraint.maxHeight*0.05,
-                              initialRating: data[index]['rating'],
-                              minRating: 1,
-                              maxRating: 5,
-                              itemCount: 5,
-                              direction: Axis.horizontal,
-                              itemPadding: EdgeInsets.symmetric(horizontal: constraint.maxWidth*0.02),
-                              allowHalfRating: true,
+                          SizedBox(
+                            height: constraint.maxHeight * 0.02,
                           ),
-                        SizedBox(height: constraint.maxHeight*0.02,),
-                        Text(data[index]['harga'],style: TextStyle(fontSize: constraint.maxWidth*0.08 ),),
-                        SizedBox(height: constraint.maxHeight*0.02,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.comment, color: Colors.grey[600], size: constraint.maxWidth*0.07,),
-                            Text(data[index]['review'], style: TextStyle(fontSize: constraint.maxWidth*0.05),),
-                            SizedBox(width: constraint.maxWidth*0.05,),
-                            Icon(Icons.thumb_up, color: Colors.grey[600], size: constraint.maxWidth*0.06,),
-                            Text(data[index]['like'], style: TextStyle(fontSize: constraint.maxWidth*0.05),),
-                          ] 
-                        ),
-                        SizedBox(height: constraint.maxHeight*0.03,),
-                        Row(
-                          children: [
-                            SizedBox(width: constraint.maxWidth*0.05,),
-                             Material(
-                              shape: CircleBorder(),
-                              elevation: 10,
-                              child: IconButton(onPressed: (){
-                              }, icon: Icon( Icons.thumb_up_rounded, size: constraint.maxHeight*0.06,))
-                            ) ,
-                          Spacer(),
-                             Material(
-                              shape: CircleBorder(),
-                              elevation: 10,
-                              child: IconButton(onPressed: (){
-                              }, icon: Icon( Icons.comment, size: constraint.maxHeight*0.06,))
-                            ) ,
-                              SizedBox(width: constraint.maxWidth*0.05,),
-                          ],
-                        )
+                          RatingBar.builder(
+                            itemBuilder: (context, _) => Icon(
+                              Icons.star,
+                              shadows: [
+                                Shadow(
+                                    color: Colors.black,
+                                    offset: Offset(
+                                      constraint.maxHeight * 0.001,
+                                      constraint.maxHeight * 0.001,
+                                    ),
+                                    blurRadius: 2)
+                              ],
+                              color: Colors.orange[300],
+                            ),
+                            onRatingUpdate: (rating) {},
+                            itemSize: constraint.maxHeight * 0.05,
+                            initialRating: data[index]['rating'],
+                            minRating: 1,
+                            maxRating: 5,
+                            itemCount: 5,
+                            direction: Axis.horizontal,
+                            itemPadding: EdgeInsets.symmetric(
+                                horizontal: constraint.maxWidth * 0.02),
+                            allowHalfRating: true,
+                          ),
+                          SizedBox(
+                            height: constraint.maxHeight * 0.02,
+                          ),
+                          Text(
+                            data[index]['harga'],
+                            style:
+                                TextStyle(fontSize: constraint.maxWidth * 0.08),
+                          ),
+                          SizedBox(
+                            height: constraint.maxHeight * 0.02,
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.comment,
+                                  color: Colors.grey[600],
+                                  size: constraint.maxWidth * 0.07,
+                                ),
+                                Text(
+                                  data[index]['review'],
+                                  style: TextStyle(
+                                      fontSize: constraint.maxWidth * 0.05),
+                                ),
+                                SizedBox(
+                                  width: constraint.maxWidth * 0.05,
+                                ),
+                                Icon(
+                                  Icons.thumb_up,
+                                  color: Colors.grey[600],
+                                  size: constraint.maxWidth * 0.06,
+                                ),
+                                Text(
+                                  data[index]['like'],
+                                  style: TextStyle(
+                                      fontSize: constraint.maxWidth * 0.05),
+                                ),
+                              ]),
+                          SizedBox(
+                            height: constraint.maxHeight * 0.03,
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: constraint.maxWidth * 0.05,
+                              ),
+                              Material(
+                                  shape: CircleBorder(),
+                                  elevation: 10,
+                                  child: IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.thumb_up_rounded,
+                                        size: constraint.maxHeight * 0.06,
+                                      ))),
+                              Spacer(),
+                              Material(
+                                  shape: CircleBorder(),
+                                  elevation: 10,
+                                  child: IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.comment,
+                                        size: constraint.maxHeight * 0.06,
+                                      ))),
+                              SizedBox(
+                                width: constraint.maxWidth * 0.05,
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     );
